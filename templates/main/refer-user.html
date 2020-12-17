@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Refer User</h1>
+            <form action="{% url 'refer_user' %}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <span>
+                        {{field.label_tag}}
+                    </span>
+                    {{field}}
+                </div>
+                <p class="text-danger">{{message}}</p>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div>
+                {% for msg in messages %}
+                <p class="text-danger">{{msg}}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

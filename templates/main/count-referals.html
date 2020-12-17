@@ -1,0 +1,31 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Count Referals</h1>
+            <form action="{% url 'count_referals' %}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <span>
+                        {{field.label_tag}}
+                    </span>
+                    {{field}}
+                </div>
+                <p class="text-danger">{{message}}</p>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div class="mt-5">
+                <p>
+                    {% if user %}
+                    This user({{user}}) has {{counter}} referals.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

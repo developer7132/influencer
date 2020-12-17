@@ -1,0 +1,45 @@
+{% extends "main/base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Add User</h1>
+            <form action="{% url 'add_user' %}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group">
+                    <span>
+                        {{field.label_tag}}
+                    </span>
+                    {{field}}
+                </div>
+                <p class="text-danger">{{message}}</p>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+
+            <table class="table mt-5">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Code</th>
+                        <th scope="col">Referer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.email}}</td>
+                        <td>{{user.code}}</td>
+                        <td>{{user.referer}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
