@@ -98,13 +98,11 @@ def biggestInfluencerView(request):
         while 1:
             for node in nodes:
                 for arr in buf:
-                    print(arr['email'], '==', node['referer'])
                     if arr['email'] == node['referer']:
 
                         referals[arr['id']] += referals[node['id']]
                         parents.append(arr)
             filtered = [item for item in buf if item not in parents] 
-            print(referals)
             if filtered:
                 buf = filtered
                 nodes = parents
